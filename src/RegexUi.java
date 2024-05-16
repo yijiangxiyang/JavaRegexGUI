@@ -92,6 +92,13 @@ public class RegexUi extends Application implements ItemListener {
     private void match() {
         regex = etRegex.getText();
         msg = etMsg.getText();
+        if (regex == null || regex.isEmpty()) {
+            etResult.setText("请输入正则！");
+            return;
+        } else if (msg == null || msg.isEmpty()) {
+            etResult.setText("请输入内容！");
+            return;
+        }
         boolean match;
         ArrayList<String> results = getMatchList(msg, regex);
         match = !results.isEmpty();
@@ -127,6 +134,13 @@ public class RegexUi extends Application implements ItemListener {
         try {
             regex = etRegex.getText();
             msg = etMsg.getText().replaceAll("[\r\n\t]", "");
+            if (regex == null || regex.isEmpty()) {
+                etResult.setText("请输入正则！");
+                return;
+            } else if (msg.isEmpty()) {
+                etResult.setText("请输入内容！");
+                return;
+            }
             Pattern p = Pattern.compile(regex);
             Matcher m = p.matcher(msg);
             if (m.find()) {
